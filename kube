@@ -1,0 +1,69 @@
+Minikube Setup and Kubernetes Steps
+
+Open a terminal (PowerShell or CMD).
+
+Start Minikube with a driver:
+Hyper-V: minikube start --driver=hyperv
+Docker: minikube start --driver=docker
+
+Verify Minikube is running:
+minikube status
+
+Use kubectl to interact with the cluster:
+minikube kubectl -- get pods -A
+
+Open the Minikube dashboard (optional):
+minikube dashboard
+
+Check versions:
+minikube version
+kubectl version --client
+
+Troubleshooting commands:
+Check logs: minikube logs
+Check updates: minikube update-check
+Update Minikube: minikube update
+
+Start Minikube cluster (automation step):
+minikube start
+
+Create a deployment in Kubernetes:
+kubectl create deployment mynginx --image=nginx
+
+If deployment already exists, update image:
+kubectl set image deployment/myngnix nginx=nginx:latest
+
+Verify deployment and pods:
+kubectl get deployments
+kubectl get pods
+kubectl describe pods
+
+Expose the deployment as a service:
+kubectl expose deployment mynginx --type=NodePort --port=80 --target-port=80
+
+Scale the deployment:
+kubectl scale deployment mynginx --replicas=4
+
+Check service:
+kubectl get service mynginx
+
+Access the Nginx app using port forwarding:
+kubectl port-forward svc/mynginx 8081:80
+Access at: http://localhost:8081
+
+If port forwarding fails, use Minikube tunnel:
+Start tunnel: minikube tunnel
+Get service URL: minikube service mynginx --url
+
+Open the Minikube dashboard:
+minikube dashboard
+
+Delete deployment and service:
+kubectl delete deployment mynginx
+kubectl delete service mynginx
+
+Stop Minikube:
+minikube stop
+
+Delete the Minikube cluster:
+minikube delete
