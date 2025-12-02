@@ -1,0 +1,59 @@
+Kubernetes MySQL Deployment and Scaling (TXT Format)
+
+1. Create a MySQL Deployment file:
+
+mysql-deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:latest
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "root123"
+        ports:
+        - containerPort: 3306
+
+
+2. Apply the Deployment:
+
+kubectl apply -f mysql-deployment.yaml
+
+
+3. Check Deployment and Pods:
+
+kubectl get deployments
+kubectl get pods
+
+
+4. Scale the MySQL Deployment to 3 replicas:
+
+kubectl scale deployment mysql --replicas=3
+
+
+5. Verify Scaling:
+
+kubectl get pods -l app=mysql
+
+
+6. Describe Pods (optional):
+
+kubectl describe pods
+
+
+7. Delete Deployment (optional cleanup):
+
+kubectl delete deployment mysql
