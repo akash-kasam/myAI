@@ -1,0 +1,32 @@
+Commands to deploy the web application using Docker on Ubuntu EC2:
+
+Update system packages
+sudo apt update
+
+Install Docker
+sudo apt-get install docker.io
+
+Install Git
+sudo apt install git
+
+Install Nano text editor
+sudo apt install nano
+
+Clone the GitHub repository
+git clone https://github.com/akash-kasam/lab.git
+
+Navigate into the project directory
+cd lab
+
+Create or edit the Dockerfile
+nano Dockerfile
+
+Dockerfile content:
+FROM nginx:latest
+COPY index.html /usr/share/nginx/html/index.html
+
+Build the Docker image
+sudo docker build -t web .
+
+Run the Docker container
+sudo docker run -d -p 80:80 web
